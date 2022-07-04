@@ -11,12 +11,32 @@ public class StringsAndThings {
      * but not the 'y' in "yellow" (not case sensitive). We'll say that a y or z is at the end of a word if there is not an alphabetic
      * letter immediately following it. (Note: Character.isLetter(char) tests if a char is an alphabetic letter.)
      * example : countYZ("fez day"); // Should return 2
-     *           countYZ("day fez"); // Should return 2
-     *           countYZ("day fyyyz"); // Should return 2
+     * countYZ("day fez"); // Should return 2
+     * countYZ("day fyyyz"); // Should return 2
      */
-    public Integer countYZ(String input){
-        return null;
+
+    public static int  countYZ(String str) {
+
+        int count = 0;
+        str = str.toLowerCase();
+        for (int i = 0; i < str.length() - 1; i++) {
+            if ((str.charAt(i) == 'z' || str.charAt(i) == 'y') && !Character.isLetter(str.charAt(i + 1))) {
+                count++;
+            }
+        }
+        if (str.charAt(str.length() - 1) == 'z' || str.charAt(str.length() - 1) == 'y') {
+            count++;
+        }
+        return count;
     }
+
+    public static void main(String[] args) {
+        System.out.println(countYZ("fez day"));
+        System.out.println(countYZ("day fez"));
+        System.out.println(countYZ("day fyyyz"));
+
+    }
+
 
     /**
      * Given two strings, base and remove, return a version of the base string where all instances of the remove string have
@@ -27,8 +47,11 @@ public class StringsAndThings {
      *           removeString("Hello there", "e") //  Should return "Hllo thr"
      *           removeString("Hello there", "x") // Should return "Hello there"
      */
-    public String removeString(String base, String remove){
-        return null;
+    public String removeString(String base, String remove) {
+
+
+        return base.replace(remove, "");
+
     }
 
     /**
@@ -40,7 +63,17 @@ public class StringsAndThings {
      *           containsEqualNumberOfIsAndNot("noisxxnotyynotxisi") // Should return true
      */
     public Boolean containsEqualNumberOfIsAndNot(String input){
-        return null;
+
+        String strNot = input.replaceAll("not", "");
+        String strIs = input.replaceAll("is", "");
+
+        int notCount = (input.length() - strNot.length()) / 3;
+        int isCount = (input.length() - strIs.length()) / 2;
+
+        System.out.println(" \"not\" occurs " + notCount + " times."); //"not" occurs x times.
+        System.out.println(" \"is\" occurs " + isCount + " times."); //"is" occurs x times.
+
+        return isCount == notCount;
     }
 
     /**
@@ -51,7 +84,22 @@ public class StringsAndThings {
      *           gHappy("xxggyygxx") // Should return  false
      */
     public Boolean gIsHappy(String input){
-        return null;
+
+        boolean result = false;
+
+
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == 'g' && input.charAt(i + 1) == 'g') {
+                result = true;
+
+            } else if (input.charAt(i) == 'g' && input.charAt(i - 1) == 'g') {
+                result = true;
+            } else if (input.charAt(i) == 'g' && input.charAt(i + 1) != 'g') {
+                result = false; 
+            }
+        }
+        System.out.println(result);
+        return result;
     }
 
 
